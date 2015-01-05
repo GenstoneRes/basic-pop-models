@@ -47,11 +47,14 @@ PARAMETERS = {
 		"starting-age-max" : 18,
 	}
 }
+min_pop = 50
+max_pop = 1500
+n_gens = 500 #This is actually n_years, but.
 
-n_gens = 300
-n_games = 100
+n_games = 5
 
 outcomes = [0,0,0]
+pop_value_list = []
 for g in range(0,n_games):
 	print("Running game {}".format(g))
 	pop = Population(PARAMETERS)
@@ -60,18 +63,21 @@ for g in range(0,n_games):
 	for i in range(0,n_gens):
 		val = pop.one_year()
 		pop_values.append(val)
-		if (val == 0):
+		if (val <= min_pop):
 			outcomes[1] += 1
 			break
-		elif (val > 1000):
+		elif (val > max_pop):
 			outcomes[2] += 1
 			break
 		if (i + 1 == n_gens):
-			print(pop_values)
 			outcomes[0] += 1
-
+	pop_value_list.append(pop_values)
+print()
+print()
+print("-------------------------------")
 print("N_gens: {}. Attempts: {}".format(n_gens,sum(outcomes)))
 print("Success: {}. Collapse: {}. Expansion: {}.".format(outcomes[0],outcomes[1],outcomes[2]))
+print("-------------------------------")
 
 #print(pop_values)
 
