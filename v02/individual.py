@@ -1,6 +1,11 @@
 import randoms
 class Individual:
 	def __init__(self,PARAMETERS):
+		#Assumptions:
+		#Binary sex model (in this case, 0 and 1)
+		#Refer to some form of sexual reproductive capacity
+		#Penis/testicle havers versus womb havers, for instance.
+		
 		self.parameters = PARAMETERS
 		self.age = 0
 		self.fertile = False
@@ -18,6 +23,10 @@ class Individual:
 		self.relationship = None
 
 	def grow(self):
+		#Growth/development assumptions:
+		#Fertility starts off at its highest young,
+		#Then decreases constantly until hitting zero.
+		#Everyone dies at the same age.
 		self.age += 1
 		if (self.fertile == False):
 			if (self.fertile_age <= self.age):
@@ -34,6 +43,10 @@ class Individual:
 		return False
 
 	def child_utility(self):
+		#Assumptions related to decision to have children:
+		#A person's decision to have another child is based
+		#Only on how many children they've had before.
+		#And not any other factors (age, economic circumstance..)
 		n_children = len(self.relationship.children)
 		if (n_children <= 4):
 			return self.utility_child[n_children]

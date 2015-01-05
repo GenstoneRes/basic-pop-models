@@ -25,7 +25,15 @@ class Relationship:
 		return self.p1.alive and self.p2.alive
 
 	def get_utility(self):
+		#Assumptions:
+		#Both partners have an equal say in whether or not
+		#They have children.
 		return self.p1.child_utility() + self.p2.child_utility()
 	
 	def get_fertility(self):
-		return self.p1.fertility + self.p2.fertility
+		#Assumptions:
+		#The fertility of a couple is the average fertility of both
+		#(which is obviously wrong, as people can be entirely
+		#infertile, but we're talking on a partner level, so.)
+		return ((self.p1.fertility + self.p2.fertility) / 1.5)
+		#The /1.5 is entirely arbritrary.

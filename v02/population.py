@@ -26,6 +26,9 @@ class Population:
 		return population
 
 	def partner_all(self,population):
+		#Relationship assumptions:
+		#All relationships are between people with complimentary sexual reproductive capacity.
+		#No-one remarries.
 		relationships = []
 		to_partner = []
 		pop = copy.copy(population)
@@ -40,6 +43,12 @@ class Population:
 		return relationships + self.new_partners(to_partner)
 
 	def new_partners(self,to_partner):
+		#Assumptions:
+		#A person picks one of the people who are not in a
+		#existing relationship, who is closest in age.
+		#All relationships have complimentary sexual characteristics
+		#People pair-bond as soon as they're fertile...
+		#Or, if noone is available, as soon as possible thereafter
 		new_relationships = []
 		sorted(to_partner, key=lambda p: p.age)
 		while len(to_partner) >= 2:
